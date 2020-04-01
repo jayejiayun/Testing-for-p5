@@ -22,8 +22,9 @@ let mode = 0;
 let magnitude = 0;
 let maxMagnitude = 848.5281374;
 
-color (c = color(255, 204, 0));
-
+color c;
+PVector distance;
+PFont sourcecode;
 let stepsX, stepsY, radius, intensity, movement, last_sum, scale, factor, wave, sum;
 
 
