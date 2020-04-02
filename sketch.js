@@ -13,10 +13,10 @@ console.log(typeof Booleanlerping);
 let linesX = 40;
 let linesY = 26;
 //----------------------------------------
-boolean(repel = true);
-boolean(autopilot = false);
-boolean(controls = true);
-boolean(voice = false);
+let repel = true
+let autopilot = false
+let controls = true
+let voice = false
 //----------------------------------------
 let coef = 1;
 let mode = 0;
@@ -39,7 +39,7 @@ class Node
     xpos = x;
     speed = s;
   }
-} 
+}
 //----------------------------------------
 let v = createVector(linesX, linesY);
 let Nodes = v.array();
