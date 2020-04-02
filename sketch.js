@@ -31,8 +31,7 @@ let stepsX, stepsY, radius, intensity, movement, last_sum, scale, factor, wave, 
 let xpos, ypos, speed, anchorx, anchory;
 class Node
 {
-
-  Node(x, y, s)
+  constructor(x, y, s)
   {
     anchorx = x;
     anchory = y;
@@ -40,8 +39,7 @@ class Node
     xpos = x;
     speed = s;
   }
-
-}
+} 
 //----------------------------------------
 let v = createVector(linesX, linesY);
 let Nodes = v.array();
