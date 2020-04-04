@@ -40,9 +40,7 @@ class Node
   }
 }
 //----------------------------------------
-v = {'x': linesX, 'y': linesY}
 let Nodes =  [linesX, linesY];
-let Nodes = Array.from(Array(linesX), () => new Array(linesY))
 for (let x = 0; x  < linesX; x++)
 {
   for (let y = 0; y  < linesY; y++)
