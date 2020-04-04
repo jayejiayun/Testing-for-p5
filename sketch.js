@@ -23,27 +23,33 @@ let mode = 0;
 let magnitude = 0;
 let maxMagnitude = 848.5281374;
 //----------------------------------------
-color c;
-PVector distance;
-PFont sourcecode;
+let c;
+let distance = createVector(x,y);
+let sourcecode
 let stepsX, stepsY, radius, intensity, movement, last_sum, scale, factor, wave, sum;
 //----------------------------------------
-let xpos, ypos, speed, anchorx, anchory;
 class Node
 {
   constructor(x, y, s)
   {
-    anchorx = x;
-    anchory = y;
-    ypos = y;
-    xpos = x;
-    speed = s;
+    this.anchorx = x;
+    this.anchory = y;
+    this.ypos = y;
+    this.xpos = x;
+    this.speed = s;
   }
 }
 //----------------------------------------
-let v = createVector(linesX, linesY);
-let Nodes = v.array();
-Node[][] Nodes = new Node[linesX][linesY];
+v = {'x': linesX, 'y': linesY}
+let Nodes =  [linesX, linesY];
+let Nodes = Array.from(Array(linesX), () => new Array(linesY))
+for (let x = 0; x  < linesX; x++)
+{
+  for (let y = 0; y  < linesY; y++)
+  {
+    Nodes[x][y] = new Node((i + 0.5) * stepsX, (j + 0.5) * stepsY, 2);
+  }
+}
 //----------------------------------------
 let index = 0;
 function input()
@@ -58,9 +64,9 @@ function setup()
   colorMode(HSB, 255);
   stepsX = (width) / linesX;
   stepsY = (height) / linesY;
-  for (int i = 0; i < linesX; i++)
+  for (let i = 0; i < linesX; i++)
   {
-    for (int j = 0; j < linesY; j++)
+    for (let j = 0; j < linesY; j++)
     {
       Nodes[i][j] = new Node((i + 0.5) * stepsX, (j + 0.5) * stepsY, 2);
     }
