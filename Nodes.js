@@ -1,6 +1,3 @@
-//let distances = [];
-
-
 let linesX = 40;
 let linesY = 26;
 //----------------------------------
@@ -23,48 +20,55 @@ class Node
   }
 }
 //----------------------------------
-let Nodes = Array.from(Array(linesX), () => new Array(linesY))
+Nodes = []
+for (let x = 0; x < linesX; x++)
+{
+  Nodes[x] = []; // create nested array
+  for (let y = 0; y < linesY; y++)
+  {
+    Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
+  }
+}
 //----------------------------------
 function setup()
 {
   
   let distance = createVector(0,0);
   createCanvas(800, 600);
+  
 
   
-//   let stepsX = width / 40;
-//   let stepsY = height / 26;
-//   for (let x = 0; x  < linesX; x++)
-// {
-//    for (let y = 0; y  < linesY; y++)
-//    {
-//      Nodes = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
-//    }
-//  }
-//    console.log(Nodes);
-}
-//----------------------------------
-function draw(){
-  // background(frameCount%255, 255, 30);
-  let distance = createVector(0,0);
-  let stepsX = width / 40;
+let stepsX = width / 40;
   let stepsY = height / 26;
   for (let x = 0; x  < linesX; x++)
 {
    for (let y = 0; y  < linesY; y++)
    {
-     Nodes = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
+     Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
    }
  }
    console.log(Nodes);
-  //let Nodes = createVector(0,0);
+}
+//----------------------------------
+function draw(){
+  background(frameCount%255, 255, 30);
+  let distance = createVector(0,0);
+  let stepsX = width / linesX;
+  let stepsY = height / linesY;
+  for (let x = 0; x  < linesX; x++)
+{
+   for (let y = 0; y  < linesY; y++)
+   {
+    Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
+   }
+ }
+   console.log(Nodes);
  
-  // let Nodes =[];
-  for (let k = 0; k < 40; k++)
+ 
+  for (let x = 0; x < 40; x++)
   {
-    // Nodes[k] = [];
     
-    for (let j = 0; j < 26; j++)
+    for (let y = 0; y < 26; y++)
     {
       if (autopilot)
       {
@@ -101,3 +105,9 @@ if (mode == 1)
     }
   }
 }
+  
+    
+  
+
+
+
