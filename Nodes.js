@@ -1,13 +1,14 @@
 let linesX = 40;
 let linesY = 26;
-//----------------------------------
+//--------------------------------------------------------------------
 let autopilot = false
-//----------------------------------
+//--------------------------------------------------------------------
 let coef = 1;
 let mode = 0;
-//----------------------------------
-let stepsX, stepsY, radius, intensity, movement, last_sum, scale, factor, wave, sum;
-//----------------------------------
+let node_scale = 0.1;
+//--------------------------------------------------------------------
+let stepsX, stepsY, radius, intensity, movement, last_sum, factor, wave, sum;
+//--------------------------------------------------------------------
 class Node
 {
   constructor(x, y, s)
@@ -19,95 +20,41 @@ class Node
     this.speed = s;
   }
 }
-//----------------------------------
+//--------------------------------------------------------------------
 Nodes = []
-for (let x = 0; x < linesX; x++)
-{
-  Nodes[x] = []; // create nested array
-  for (let y = 0; y < linesY; y++)
-  {
-    Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
-  }
-}
-//----------------------------------
+//--------------------------------------------------------------------
 function setup()
 {
-  
-  let distance = createVector(0,0);
   createCanvas(800, 600);
-  
-
-  
-let stepsX = width / 40;
-  let stepsY = height / 26;
-  for (let x = 0; x  < linesX; x++)
-{
-   for (let y = 0; y  < linesY; y++)
-   {
-     Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
-   }
- }
-   console.log(Nodes);
-}
-//----------------------------------
-function draw(){
-  background(frameCount%255, 255, 30);
-  let distance = createVector(0,0);
+  //------------------------------------------------------------------
   let stepsX = width / linesX;
   let stepsY = height / linesY;
-  for (let x = 0; x  < linesX; x++)
-{
-   for (let y = 0; y  < linesY; y++)
-   {
-    Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
-   }
- }
-   console.log(Nodes);
- 
- 
-  for (let x = 0; x < 40; x++)
+  for (let x = 0; x < linesX; x++)
   {
-    
-    for (let y = 0; y < 26; y++)
+    Nodes[x] = []; // create nested array
+    for (let y = 0; y < linesY; y++)
     {
-      if (autopilot)
-      {
-
-      }
-      else
-      {
-let distance = createVector((Nodes.xpos - mouseX), (Nodes.ypos - mouseY));
-      }
-
-//-------------------------------
-
-//---------------------------------
-if (radius > 50)
-    {
-     radius = 50;
-     }
-       if (radius < 2)
-     {
-        radius = 2;
-      }
-//----------------------------------
- if (mode == 0)
-   {
-ellipse(Nodes.xpos + coef * (distance.x * scale), Nodes.ypos + coef * (distance.y * scale), radius, radius);
+      Nodes[x][y] = new Node((x + 0.5) * stepsX, (y + 0.5) * stepsY, 2);
+    }
+  }
+  console.log(Nodes);
+  //------------------------------------------------------------------
 }
-if (mode == 1)
-   {
-   strokeWeight(radius / 3);
-   strokeCap(PROJECT);
-       line(Nodes.xpos + coef * (distance.x * scale), Nodes.ypos + coef * (distance.y * scale), Nodes.xpos, Nodes.ypos);
-     }
-      
+//--------------------------------------------------------------------
+function draw()
+{
+  background(frameCount % 255, 255, 30);
+  background(255);
+  radius = 2;
+  fill(0);
+
+
+  for (let x = 0; x < linesX; x++)
+  {
+    for (let y = 0; y < linesY; y++)
+    {
+      let distance = createVector((Nodes[x][y].xpos - mouseX), (Nodes[x][y].ypos - mouseY));
+      ellipse(Nodes[x][y].xpos + coef * (distance.x * node_scale), Nodes[x][y].ypos + coef * (distance.y * node_scale), radius, radius);
     }
   }
 }
-  
-    
-  
-
-
-
