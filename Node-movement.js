@@ -25,14 +25,16 @@ let mode = 0;
 let node_scale = 0.1;
 let magnitude = 0;
 let maxMagnitude = 848.5281374;
+
 //----------------------------------------
 // let c = color([0],[0],[0]);
 // console.log(typeof c);
 // let distance = createVector(0,0);
 
 //
-let sourcecode
-let stepsX, stepsY, radius, intensity, movement, last_sum, scale, factor, wave, sum;
+let sourcecode;
+
+let stepsX, stepsY, radius, intensity, movement, scale,last_sum, factor, waveform, sum;
 //----------------------------------------
 class Node
 {
@@ -107,45 +109,27 @@ function draw()
       ellipse(Nodes[x][y].xpos + coef * (distance.x * node_scale), Nodes[x][y].ypos + coef * (distance.y * node_scale), radius, radius);
     }
   }
-  
-  
-  
-  
-  
-
-
-  
   //-----------------------------------------------
 
   coef = (repel ? 1 : -1);
-  if (lerping)
-  {
-    magnitude = lerp(sum, last_sum, 0.7) / 2.5;
-  }
-  else
-  {
-    magnitude = last_sum;
-  }
+  magnitude = last_sum;
   wave = last_sum / 2.5;
 
   for (let x = 0; x < linesX; x++)
   {
     for (let y = 0; y < linesY; y++)
     {
-      if (autopilot)
-      {
-
-      }
-      else
-      {
+     
      let  distance = createVector(Nodes[x][y].xpos - mouseX, Nodes[x][y].ypos - mouseY);
-      }
+      
     scale = (1 / mag((Nodes[x][y].xpos - mouseX),(Nodes[x][y].ypos - mouseY))) * magnitude;
+      
+
 
 
       
       fill(255);
-      let distance=createVector((Nodes[x][y].xpos - mouseX), (Nodes[x][y].ypos - mouseY));
+
       intensity = pow(1 - mag(distance) / (maxMagnitude), 5) / 5;
       radius = (intensity * magnitude);
       Nodes[x][y].xpos += coef * (distance.x * scale) / 25;
@@ -163,25 +147,19 @@ function draw()
   c = color(170 + magnitude / 2, magnitude * 5, 255, 255);
       fill(c);
       stroke(c);
-      if (mode == 0)
-      {
-        ellipse(Nodes[x][y].xpos + coef * (distance.x * scale), Nodes[x][y].ypos + coef * (distance.y * scale), radius, radius);
-      }
-      if (mode == 1)
-      {
-        strokeWeight(radius / 3);
-        strokeCap(PROJECT);
-        line(Nodes[x][y].xpos + coef * (distance.x * scale), Nodes[x][y].ypos + coef * (distance.y * scale), Nodes[x][y].xpos, Nodes[x][y].ypos);
-      }
+ellipse(Nodes[x][y].xpos + coef*(distance.x*scale), Nodes[x][y].ypos + coef*(distance.y*scale), radius, radius);
+    }
     }
     
   }
 
 
     sum = 0;
+// let waveform = fft.waveform();
+// let step = floor(waveform.length / 100);
 
-  
-  for (let i = 0; i < floor.waveform() - 1; i++)
+  for (let i = 0; i < Math.floor(waveform()) - 1; i++)
+  // for (let i = 0; i < Math.floor(fft.waveform(1024,Nodes)) ; i++)
   {
     if (voice)
     {
@@ -194,8 +172,7 @@ function draw()
       sum += abs(floor.left.get(i));
     }
   }
-  last_sum = sum;
+last_sum = sum;
 
 //----------------------------------------
 
-}
